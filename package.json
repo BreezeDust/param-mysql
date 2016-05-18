@@ -1,0 +1,25 @@
+{
+  "name": "param-mysql",
+  "version": "1.0.0",
+  "description": "parameterization for mysql",
+  "main": "DataParameter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BreezeDust/param-mysql.git"
+  },
+  "keywords": [
+    "mysql"
+  ],
+  "author": "BreezeDust",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BreezeDust/param-mysql/issues"
+  },
+  "homepage": "https://github.com/BreezeDust/param-mysql#readme",
+  "dependencies": {
+      "mysql": "^2.10.2"
+    }
+}

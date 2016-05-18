@@ -65,5 +65,8 @@ DataParameter.prototype._createSqlStr=function(){
         this._sql=this._sql+value+this._sqlArray[count++];
     }
 };
+DataParameter.prototype.getMysql=function(){
+    return require('./mysql');
+};
 
 module.exports=DataParameter;
