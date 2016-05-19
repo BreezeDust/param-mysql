@@ -3,6 +3,9 @@
  * sql参数化类
  */
 var mysql = require('mysql');
+var MysqlPool=require('./MysqlPool');
+var _MY_SQL_POOL={};
+var _DEFAULT_KEY="___default_";
 function DataParameter(sqlStr){
     this._sqlArray=[]; // sql按照%s分割后的数组
     this._valueArray=[]; // 值数组
@@ -65,8 +68,37 @@ DataParameter.prototype._createSqlStr=function(){
         this._sql=this._sql+value+this._sqlArray[count++];
     }
 };
-DataParameter.prototype.getMysql=function(){
-    return require('./mysql');
+/**
+ * ==========================other=========================
+ */
+DataParameter.createMysqlPool=function(mysqlConfig,key){
+    if(key==null){
+        key=_DEFAULT_KEY;
+    }
+    if(_MY_SQL_POOL[key]!=null){
+        throw new Error("the pool hasd exits!!")
+        return;
+    }
+    _MY_SQL_POOL[key]=new MysqlPool(mysqlConfig);
+    return _MY_SQL_POOL[key];
 };
-
+DataParameter.mysql=function(key){
+    if(key==null){
+        key=_DEFAULT_KEY;
+    }
+    if(_MY_SQL_POOL[key]!=null){
+        return _MY_SQL_POOL[key];
+    }
+    return null;
+};
+DataParameter.endMysqlPool=function(){
+    if(_MY_SQL_POOL!=null){
+        for(var key in _MY_SQL_POOL){
+            _MY_SQL_POOL[key].end();
+        }
+    }
+};
+DataParameter.MysqlPool=function(key){
+    return MysqlPool;
+};
 module.exports=DataParameter;
