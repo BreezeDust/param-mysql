@@ -3,7 +3,7 @@
 * @Date:   2016-03-06
 * @Email:  breezedust.com@gmail.com
 * @Last modified by:   BreezeDust
-* @Last modified time: 2016-05-18
+* @Last modified time: 2016-05-28
 */
 var mysql = require('mysql');
 function MysqlPool(config){
@@ -28,7 +28,7 @@ MysqlPool.prototype.query=function(sql,callback) {
             console.error('[sqlqueryErr] ' + err.stack);
             //connection.release();
             if(callback !=null){
-                callback(err,res);
+                callback(err);
             }
             throw err;
         }
